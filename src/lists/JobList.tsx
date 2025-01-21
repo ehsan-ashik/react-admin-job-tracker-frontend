@@ -10,9 +10,9 @@ import {
 
 export const JobList = () => (
   <List>
-    <Datagrid>
+    <Datagrid bulkActionButtons={false}>
       <TextField source="position" />
-      <TextField source="company.name" label="Company" />
+      <ReferenceField source="company_id" reference="company" link="show"/>
       <TextField source="status" />
       <DateField source="apply_date" />
       <TextField source="response_date" />
