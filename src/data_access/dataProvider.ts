@@ -4,8 +4,8 @@ const API_URL = "http://localhost:3000/api";
 
 export const dataProvider: DataProvider = {
   getList: async (resource, params) => {
-    const { page, perPage } = params.pagination;
-    const { field, order } = params.sort;
+    const { page, perPage } = params.pagination !== undefined ? params.pagination : {page: 1, perPage: 10};
+    const { field, order } = params.sort !== undefined ? params.sort: {field: "id", order: "ASC"};
     const filter = JSON.stringify(params.filter);
 
     const response = await fetchUtils.fetchJson(
@@ -13,7 +13,7 @@ export const dataProvider: DataProvider = {
     );
     return {
       data: response.json.data,
-      total: 10,
+      total: parseInt(response.headers.get("X-Total-Rows") || '10', 10),
     };
   },
   getOne: async (resource, params) => {
@@ -42,9 +42,10 @@ export const dataProvider: DataProvider = {
     const response = await fetchUtils.fetchJson(
       `${API_URL}/${resource}?page=${page}&limit=${perPage}&sort=["${field}","${order}"]&filter=${filter}`,
     );
+    
     return {
       data: response.json.data,
-      total: 10,
+      total: parseInt(response.headers.get("X-Total-Rows") || '10', 10),
     };
   },
   create: async (resource, params) => {

@@ -1,4 +1,4 @@
-# fe
+# Job Tracker - React Admin
 
 ## Installation
 
