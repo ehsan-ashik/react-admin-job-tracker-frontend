@@ -14,6 +14,8 @@ import { JobShow } from "./shows/JobShow";
 import { JobEdit } from "./edits/JobEdit";
 import { JobCreate } from "./creates/JobCreate";
 import { ResumeShow } from "./shows/ResumeShow";
+import { ResumeCreate } from "./creates/ResumeCreate";
+import { CompanyEdit } from "./edits/CompanyEdit";
 
 export const App = () => (
   <Admin
@@ -29,8 +31,8 @@ export const App = () => (
       edit={JobEdit}
       create={JobCreate}
     />
-    <Resource name="resume" list={ResumeList} show={ResumeShow} />
-    <Resource name="company" list={CompanyList} />
+    <Resource name="resume" list={ResumeList} show={ResumeShow} create={ResumeCreate} />
+    <Resource name="company" list={CompanyList} edit={CompanyEdit} />
     <Resource name="job_category" list={JobCategoryList} />
   </Admin>
 );

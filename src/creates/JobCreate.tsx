@@ -35,103 +35,117 @@ export const JobCreate = () => {
     };
 
     return (
-  <Create>
-    <SimpleForm direction={"column"}>
-      <Stack
-        direction={"row"}
-        divider={
-          <Box
-            component="hr"
-            sx={{
-              width: `1000px`,
-              border: (theme) =>
-                `1px solid ${theme.palette.mode === "dark" ? "#15122100" : "#fff"}`,
-            }}
-          />
-        }
-      >
-        <TextInput source="position" />
-        <ReferenceInput source="job_category_id" reference="job_category" />
-      </Stack>
-      <Stack
-        direction={"row"}
-        divider={
-          <Box
-            component="hr"
-            sx={{
-              width: `1000px`,
-              border: (theme) =>
-                `1px solid ${theme.palette.mode === "dark" ? "#15122100" : "#fff"}`,
-            }}
-          />
-        }
-      >
-        <ReferenceInput source="company_id" reference="company" >
-            <AutocompleteInput onCreate={handleCreateCompany} />
+      <Create redirect="list" title="Create New Job">
+        <SimpleForm direction={"column"}>
+          <Stack
+            direction={"row"}
+            sx={{ width: 1000 }}
+            divider={
+              <Box
+                component="hr"
+                sx={{
+                  width: `200px`,
+                  border: (theme) =>
+                    `1px solid ${theme.palette.mode === "dark" ? "#15122100" : "#fff"}`,
+                }}
+              />
+            }
+          >
+            <TextInput source="position" required />
+            <ReferenceInput source="job_category_id" reference="job_category" />
+          </Stack>
+          <Stack
+            direction={"row"}
+            sx={{ width: 1000 }}
+            divider={
+              <Box
+                component="hr"
+                sx={{
+                  width: `200px`,
+                  border: (theme) =>
+                    `1px solid ${theme.palette.mode === "dark" ? "#15122100" : "#fff"}`,
+                }}
+              />
+            }
+          >
+            <ReferenceInput source="company_id" reference="company">
+              <AutocompleteInput onCreate={handleCreateCompany} />
+            </ReferenceInput>
+            <TextInput source="location" />
+          </Stack>
+          <Stack
+            direction={"row"}
+            sx={{ width: 1000 }}
+            divider={
+              <Box
+                component="hr"
+                sx={{
+                  width: `200px`,
+                  border: (theme) =>
+                    `0px solid ${theme.palette.mode === "dark" ? "#15122100" : "#fff"}`,
+                }}
+              />
+            }
+          >
+            <SelectInput
+              choices={JobStatusChoices}
+              source="status"
+              defaultValue={"Applied"}
+            />
+            <DateInput
+              source="apply_date"
+              parse={(date: Date) =>
+                date ? new Date(date).toISOString() : null
+              }
+              defaultValue={new Date(Date.now()).toISOString()}
+            />
+          </Stack>
+          <Stack
+            direction={"row"}
+            sx={{ width: 1000 }}
+            divider={
+              <Box
+                component="hr"
+                sx={{
+                  width: `200px`,
+                  border: (theme) =>
+                    `1px solid ${theme.palette.mode === "dark" ? "#15122100" : "#fff"}`,
+                }}
+              />
+            }
+          >
+            <ReferenceInput source="resume_id" reference="resume" />
+            <SelectInput choices={JobExcitementChoices} source="excitement" />
+          </Stack>
+          <Stack
+            direction={"row"}
+            sx={{ width: 1000 }}
+            divider={
+              <Box
+                component="hr"
+                sx={{
+                  width: `200px`,
+                  border: (theme) =>
+                    `1px solid ${theme.palette.mode === "dark" ? "#15122100" : "#fff"}`,
+                }}
+              />
+            }
+          >
+            <Stack direction={"row"} sx={{ width: 1000, alignItems: "center" }}>
+              <BooleanInput source="is_referred" label="Referred?" />
+              <TextInput source="referred_by" multiline minRows={2} />
+            </Stack>
+            <TextInput source="remark" multiline minRows={2} />
+          </Stack>
 
-        </ReferenceInput>
-        <TextInput source="location" />
-      </Stack>
-      <br />
-      <Stack
-        direction={"row"}
-        divider={
-          <Box
-            component="hr"
-            sx={{
-              width: `997px`,
-              border: (theme) =>
-                `0px solid ${theme.palette.mode === "dark" ? "#15122100" : "#fff"}`,
-            }}
-          />
-        }
-      >
-        <SelectInput choices={JobStatusChoices} source="status" defaultValue={"Applied"} />
-        <DateInput
-          source="apply_date"
-          parse={(date: Date) => (date ? new Date(date).toISOString() : null)}
-          defaultValue={new Date(Date.now()).toISOString()}
-        />
-      </Stack>
-      <br />
-      <Stack
-        direction={"row"}
-        divider={
-          <Box
-            component="hr"
-            sx={{
-              width: `1000px`,
-              border: (theme) =>
-                `1px solid ${theme.palette.mode === "dark" ? "#15122100" : "#fff"}`,
-            }}
-          />
-        }
-      >
-        <TextInput source="referred_by" />
-        <SelectInput choices={JobExcitementChoices} source="excitement" />
-      </Stack>
-      <BooleanInput source="is_referred" label="Referred?" />
-      <br />
-      <Stack
-        direction={"row"}
-        divider={
-          <Box
-            component="hr"
-            sx={{
-              width: `0px`,
-              border: (theme) =>
-                `10px solid ${theme.palette.mode === "dark" ? "#15122100" : "#fff"}`,
-            }}
-          />
-        }
-      >
-        <RichTextInput source="remark" />
-        <RichTextInput
-          source="job_description.description"
-          label="Job description"
-        />
-      </Stack>
-    </SimpleForm>
-  </Create>
-);
+          <Stack sx={{ width: 1000 }}>
+            <RichTextInput
+              fullWidth
+              source="job_description.description"
+              label="Job description"
+            />
+          </Stack>
+        </SimpleForm>
+      </Create>
+    );
 };

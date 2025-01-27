@@ -60,7 +60,10 @@ export const dataProvider: DataProvider = {
   getManyReference: async (resource, params) => {
     const { page, perPage } = params.pagination;
     const { field, order } = params.sort;
-    const filter = JSON.stringify(params.filter);
+
+    var filters: Record<string, any> = {};
+    filters[params.target] = params.id;
+    const filter = JSON.stringify(filters)
 
     const response = await fetchUtils.fetchJson(
       `${API_URL}/${resource}?page=${page}&limit=${perPage}&sort=["${field}","${order}"]&filter=${filter}`,

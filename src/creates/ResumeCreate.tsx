@@ -8,7 +8,7 @@ import {
 
 export const ResumeCreate = () => {
   return (
-    <Create>
+    <Create redirect="list">
       <SimpleForm direction={"column"}>
         <TextInput source="title" />
         <TextInput source="remark" multiline />

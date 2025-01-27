@@ -38,7 +38,14 @@ export const JobList = () => (
     filters={jobFilters}
     actions={<JobListActions />}
   >
-    <Datagrid bulkActionButtons={false} rowClick={false}>
+    <Datagrid
+      bulkActionButtons={false}
+      rowClick={false}
+      rowSx={(record) => ({
+        bgcolor: record.status == "Rejected" ? "#212" : null,
+        opacity: record.status == "Rejected" ? .6 : null,
+      })}
+    >
       <TextField source="position" />
       <ReferenceField source="company_id" reference="company" link="show" />
       <TextField source="status" />
@@ -54,10 +61,21 @@ export const JobList = () => (
         link="show"
       />
       <BooleanField source="is_referred" />
-      <FunctionField source="excitement" render={record => JobExcitementChoices.find(choice => choice.id == record.excitement)?.name.slice(0, 6)} />
+      <FunctionField
+        source="excitement"
+        sx={{ fontStyle: "italic" }}
+        render={(record) =>
+          record.excitement
+            ? JobExcitementChoices.find(
+                (choice) => choice.id == record.excitement,
+              )?.name.slice(0, 6)
+            : "___"
+        }
+      />
       <>
-        <EditButton />
         <ShowButton />
+        <span style={{ paddingLeft: 5 }}></span>
+        <EditButton />
       </>
     </Datagrid>
   </List>

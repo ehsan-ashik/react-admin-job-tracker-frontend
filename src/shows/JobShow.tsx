@@ -3,7 +3,7 @@ import { Divider } from "@mui/material";
 import { JobExcitementChoices } from '../data_access/appData';
 
 export const JobShow = () => (
-  <Show>
+  <Show title="Job Overview">
     <SimpleShowLayout
       direction={"row"}
       spacing={5}
@@ -17,7 +17,14 @@ export const JobShow = () => (
         reference="job_category"
         link="show"
       />
-      <FunctionField source="excitement" emptyText="No excitement value..." render={record => JobExcitementChoices.find(choice => choice.id == record.excitement)?.name} />
+      <FunctionField
+        source="excitement"
+        emptyText="No excitement value..."
+        render={(record) =>
+          JobExcitementChoices.find((choice) => choice.id == record.excitement)
+            ?.name
+        }
+      />
       <TextField source="status" sx={{ fontWeight: "bold" }} />
     </SimpleShowLayout>
     <br />

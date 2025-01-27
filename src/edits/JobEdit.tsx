@@ -13,31 +13,33 @@ import { RichTextInput } from "ra-input-rich-text";
 
 
 export const JobEdit = () => (
-  <Edit>
+  <Edit redirect="show" title="Edit Job">
     <SimpleForm direction={"column"}>
       <Stack
         direction={"row"}
+        sx={{ width: 1000 }}
         divider={
           <Box
             component="hr"
             sx={{
-              width: `1000px`,
+              width: `200px`,
               border: (theme) =>
                 `1px solid ${theme.palette.mode === "dark" ? "#15122100" : "#fff"}`,
             }}
           />
         }
       >
-        <TextInput source="position" />
+        <TextInput source="position" required />
         <ReferenceInput source="job_category_id" reference="job_category" />
       </Stack>
       <Stack
         direction={"row"}
+        sx={{ width: 1000 }}
         divider={
           <Box
             component="hr"
             sx={{
-              width: `1000px`,
+              width: `200px`,
               border: (theme) =>
                 `1px solid ${theme.palette.mode === "dark" ? "#15122100" : "#fff"}`,
             }}
@@ -47,60 +49,70 @@ export const JobEdit = () => (
         <ReferenceInput source="company_id" reference="company" />
         <TextInput source="location" />
       </Stack>
-      <br />
       <Stack
         direction={"row"}
+        sx={{ width: 1000 }}
         divider={
           <Box
             component="hr"
             sx={{
-              width: `997px`,
+              width: `200px`,
               border: (theme) =>
                 `0px solid ${theme.palette.mode === "dark" ? "#15122100" : "#fff"}`,
             }}
           />
         }
       >
-        <SelectInput choices={JobStatusChoices} source="status" />
+        <SelectInput
+          choices={JobStatusChoices}
+          source="status"
+        />
         <DateInput
           source="response_date"
           parse={(date: Date) => (date ? new Date(date).toISOString() : null)}
         />
       </Stack>
-      <br />
       <Stack
         direction={"row"}
+        sx={{ width: 1000 }}
         divider={
           <Box
             component="hr"
             sx={{
-              width: `1000px`,
+              width: `200px`,
               border: (theme) =>
                 `1px solid ${theme.palette.mode === "dark" ? "#15122100" : "#fff"}`,
             }}
           />
         }
       >
-        <TextInput source="referred_by" />
+        <ReferenceInput source="resume_id" reference="resume" />
         <SelectInput choices={JobExcitementChoices} source="excitement" />
       </Stack>
-      <BooleanInput source="is_referred" label="Referred?" />
-      <br />
       <Stack
         direction={"row"}
+        sx={{ width: 1000 }}
         divider={
           <Box
             component="hr"
             sx={{
-              width: `0px`,
+              width: `200px`,
               border: (theme) =>
-                `10px solid ${theme.palette.mode === "dark" ? "#15122100" : "#fff"}`,
+                `1px solid ${theme.palette.mode === "dark" ? "#15122100" : "#fff"}`,
             }}
           />
         }
       >
-        <RichTextInput source="remark" />
+        <Stack direction={"row"} sx={{ width: 1000, alignItems: "center" }}>
+          <BooleanInput source="is_referred" label="Referred?" />
+          <TextInput source="referred_by" multiline minRows={2} />
+        </Stack>
+        <TextInput source="remark" multiline minRows={2} />
+      </Stack>
+
+      <Stack sx={{ width: 1000 }}>
         <RichTextInput
+          fullWidth
           source="job_description.description"
           label="Job description"
         />
