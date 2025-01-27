@@ -13,6 +13,7 @@ import { JobCategoryList } from "./lists/JobCategoryList";
 import { JobShow } from "./shows/JobShow";
 import { JobEdit } from "./edits/JobEdit";
 import { JobCreate } from "./creates/JobCreate";
+import { ResumeShow } from "./shows/ResumeShow";
 
 export const App = () => (
   <Admin
@@ -21,9 +22,15 @@ export const App = () => (
     theme={radiantLightTheme}
     darkTheme={radiantDarkTheme}
   >
-    <Resource name="job" list={JobList} show={JobShow} edit={JobEdit} create={JobCreate} />
+    <Resource
+      name="job"
+      list={JobList}
+      show={JobShow}
+      edit={JobEdit}
+      create={JobCreate}
+    />
+    <Resource name="resume" list={ResumeList} show={ResumeShow} />
     <Resource name="company" list={CompanyList} />
-    <Resource name="resume" list={ResumeList} />
     <Resource name="job_category" list={JobCategoryList} />
   </Admin>
 );

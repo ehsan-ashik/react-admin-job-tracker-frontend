@@ -13,6 +13,7 @@ const sharedKeyCredential = new StorageSharedKeyCredential(
 );
 
 export function createAccountSas() {
+    console.log(constants.accountName)
     const sasOptions = {
 
         services: AccountSASServices.parse("b").toString(),          // blobs, tables, queues, files
