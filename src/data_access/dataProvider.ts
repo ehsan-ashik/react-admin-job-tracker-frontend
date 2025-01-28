@@ -1,6 +1,6 @@
-import { CreateParams, DataProvider, fetchUtils } from "react-admin";
+import { CreateParams, DataProvider, fetchUtils, UpdateParams } from "react-admin";
 
-const API_URL = "http://localhost:3000/api";
+const API_URL = import.meta.env.VITE_API_URL;
 
 type ResumeParams = {
   id: string;
@@ -13,7 +13,7 @@ type ResumeParams = {
   };
 };
 
-const createResumeFormData = (params: CreateParams<ResumeParams>) => {
+const resumeFormData = (params: CreateParams<ResumeParams> | UpdateParams<ResumeParams>) => {
   const formData = new FormData();
   params.data.resume?.rawFile &&
     formData.append("file", params.data.resume.rawFile);
@@ -22,6 +22,7 @@ const createResumeFormData = (params: CreateParams<ResumeParams>) => {
 
   return formData;
 };
+
 
 export const dataProvider: DataProvider = {
   getList: async (resource, params) => {
@@ -76,7 +77,7 @@ export const dataProvider: DataProvider = {
   },
   create: async (resource, params) => {
     if (resource == "resume") {
-      const formData = createResumeFormData(params);
+      const formData = resumeFormData(params);
       const resumeResponse = await fetchUtils.fetchJson(
         `${API_URL}/${resource}`,
         {
@@ -94,6 +95,19 @@ export const dataProvider: DataProvider = {
   },
   update: async (resource, params) => {
     const url = `${API_URL}/${resource}/${params.id}`;
+
+    if (resource == "resume") {
+      const formData = resumeFormData(params);
+      const resumeResponse = await fetchUtils.fetchJson(
+        url,
+        {
+          method: "PUT",
+          body: formData,
+        },
+      );
+      return { data: resumeResponse.json.data };
+    }
+
     const response = await fetchUtils.fetchJson(url, {
       method: "PUT",
       body: JSON.stringify(params.data),

@@ -16,6 +16,12 @@ import { JobCreate } from "./creates/JobCreate";
 import { ResumeShow } from "./shows/ResumeShow";
 import { ResumeCreate } from "./creates/ResumeCreate";
 import { CompanyEdit } from "./edits/CompanyEdit";
+import { ResumeEdit } from "./edits/ResumeEdit";
+import { CompanyShow } from "./shows/CompanyShow";
+import { CompanyCreate } from "./creates/CompanyCreate";
+import { JobCategoryEdit } from "./edits/JobCategoryEdit";
+import { JobCategoryShow } from "./shows/JobCategoryShow";
+import { JobCategoryCreate } from "./creates/JobCategoryCreate";
 
 export const App = () => (
   <Admin
@@ -28,11 +34,29 @@ export const App = () => (
       name="job"
       list={JobList}
       show={JobShow}
-      edit={JobEdit}
       create={JobCreate}
+      edit={JobEdit}
     />
-    <Resource name="resume" list={ResumeList} show={ResumeShow} create={ResumeCreate} />
-    <Resource name="company" list={CompanyList} edit={CompanyEdit} />
-    <Resource name="job_category" list={JobCategoryList} />
+    <Resource
+      name="resume"
+      list={ResumeList}
+      show={ResumeShow}
+      create={ResumeCreate}
+      edit={ResumeEdit}
+    />
+    <Resource
+      name="company"
+      list={CompanyList}
+      show={CompanyShow}
+      create={CompanyCreate}
+      edit={CompanyEdit}
+    />
+    <Resource
+      name="job_category"
+      list={JobCategoryList}
+      show={JobCategoryShow}
+      create={JobCategoryCreate}
+      edit={JobCategoryEdit}
+    />
   </Admin>
 );

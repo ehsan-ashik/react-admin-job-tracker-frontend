@@ -7,16 +7,20 @@ export const CompanyList = () => (
       <TextField source="name" />
       <FunctionField
         source="excitement"
-        render={(record) => record.excitement ?
-          CompanyExcitementChoices.find(
-            (choice) => choice.id == record.excitement,
-          )?.name : "No excitement value assigned..."
+        render={(record) =>
+          record.excitement
+            ? CompanyExcitementChoices.find(
+                (choice) => choice.id == record.excitement,
+              )?.name
+            : "No excitement value assigned..."
         }
       />
       <ReferenceManyCount
         label="Applied jobs"
         reference="job"
         target="company_id"
+        sx={{ fontWeight: "bold", color: "#9055f0" }}
+        textAlign="center"
       />
       <TextField
         source="career_cite_link"
@@ -25,7 +29,7 @@ export const CompanyList = () => (
       />
       <>
         <ShowButton />
-        <span style={{paddingLeft: 5}}></span>
+        <span style={{ paddingLeft: 5 }}></span>
         <EditButton />
       </>
     </Datagrid>

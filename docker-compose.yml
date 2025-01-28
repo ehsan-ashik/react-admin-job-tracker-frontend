@@ -1,0 +1,20 @@
+services:
+  azure_service:
+    build: ./api
+    ports:
+      - "5000:5000"
+    env_file:
+      - path: ./api/.env
+    command: npm run dev
+  frontend:
+    build: .
+    ports:
+      - "5173:5173"
+    depends_on:
+      - azure_service
+    env_file:
+      - path: ./.env
+    command: npm run dev
+    volumes:
+      - .:/app
+

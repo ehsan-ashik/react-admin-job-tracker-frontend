@@ -1,21 +1,22 @@
 import {
-  Create,
+  Edit,
   FileField,
   FileInput,
   SimpleForm,
   TextInput,
 } from "react-admin";
+import { PdfShow } from "../shows/PdfShow";
 
-export const ResumeCreate = () => {
+export const ResumeEdit = () => {
   return (
-    <Create title="Create New Resume" redirect="list">
+    <Edit title="Edit Resume" redirect="list" aside={<PdfShow />}>
       <SimpleForm direction={"column"}>
-        <TextInput source="title" required />
+        <TextInput source="title" />
         <TextInput source="remark" multiline />
         <FileInput source="resume" accept={{ "application/pdf": [".pdf"] }}>
           <FileField source="src" title="title" />
         </FileInput>
       </SimpleForm>
-    </Create>
+    </Edit>
   );
 };

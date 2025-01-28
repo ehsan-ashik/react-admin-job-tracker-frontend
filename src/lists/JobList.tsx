@@ -40,7 +40,6 @@ export const JobList = () => (
   >
     <Datagrid
       bulkActionButtons={false}
-      rowClick={false}
       rowSx={(record) => ({
         bgcolor: record.status == "Rejected" ? "#212" : null,
         opacity: record.status == "Rejected" ? .6 : null,

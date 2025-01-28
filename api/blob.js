@@ -1,7 +1,4 @@
 import { AccountSASPermissions, AccountSASResourceTypes, AccountSASServices, generateAccountSASQueryParameters, SASProtocol, StorageSharedKeyCredential } from '@azure/storage-blob';
-import * as dotenv from 'dotenv';
-
-dotenv.config();
 
 const constants = {
     accountName: process.env.AZURE_ACCOUNT_NAME,

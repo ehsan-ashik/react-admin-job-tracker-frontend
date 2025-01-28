@@ -1,15 +1,10 @@
-import {
-  Edit,
-  SelectInput,
-  SimpleForm,
-  TextInput,
-} from "react-admin";
+import { Create, SelectInput, SimpleForm, TextInput } from "react-admin";
 import { Box, Stack } from "@mui/material";
 import { CompanyExcitementChoices } from "../data_access/appData";
 
-export const CompanyEdit = () => {
+export const CompanyCreate = () => {
   return (
-    <Edit title="Edit Company" redirect="list" sx={{ width: 1000 }}>
+    <Create title="Create New Company" redirect="list" sx={{ width: 1000 }}>
       <SimpleForm direction={"column"} sx={{ width: 1000 }}>
         <Stack
           direction="row"
@@ -25,7 +20,7 @@ export const CompanyEdit = () => {
             />
           }
         >
-          <TextInput source="name" />
+          <TextInput source="name" required />
           <SelectInput choices={CompanyExcitementChoices} source="excitement" />
         </Stack>
         <Stack
@@ -45,6 +40,6 @@ export const CompanyEdit = () => {
           <TextInput source="career_cite_link" label="Career website" />
         </Stack>
       </SimpleForm>
-    </Edit>
+    </Create>
   );
 };
