@@ -9,12 +9,11 @@ services:
   frontend:
     build: .
     ports:
-      - "5173:5173"
+      - "80:80"
     depends_on:
       - azure_service
     env_file:
       - path: ./.env
-    command: npm run dev
     volumes:
       - .:/app
 
